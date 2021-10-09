@@ -10,8 +10,6 @@ namespace SamuraiApp.UI
         private static SamuraiContext _context = new();
         static void Main(string[] args)
         {
-            _context.Database.EnsureCreated();
-
             Console.WriteLine("Enter a Samurai Name To Save to DB:");
             string samurai = Console.ReadLine();
             AddSamurai(samurai);
