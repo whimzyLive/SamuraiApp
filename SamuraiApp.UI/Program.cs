@@ -14,7 +14,7 @@ namespace SamuraiApp.UI
             string samurai = Console.ReadLine();
             AddSamurai(samurai);
 
-            Console.WriteLine("All Samuraies: ");
+            Console.WriteLine("All Samuraies In DB: ");
             GetSamurais();
 
 
