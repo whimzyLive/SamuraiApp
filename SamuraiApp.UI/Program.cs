@@ -29,8 +29,7 @@ namespace SamuraiApp.UI
 
         private static void GetSamurais()
         {
-            var samurais = _context.Samurais.ToList();
-
+            var samurais = _context.Samurais.Where(s => s.Name != null).ToList();
             samurais.ForEach(sam => Console.WriteLine(sam.Name));
         }
     }
