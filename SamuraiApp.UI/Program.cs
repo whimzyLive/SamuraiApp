@@ -2,6 +2,7 @@
 using SamuraiApp.Data;
 using System.Linq;
 using System;
+using Microsoft.EntityFrameworkCore;
 
 namespace SamuraiApp.UI
 {
@@ -17,14 +18,17 @@ namespace SamuraiApp.UI
 
 
             Console.WriteLine("Samurai Operations: ");
-            GetSamurais();
-            QueryFilter();
-            RetriveAndUpdateSamurai();
-            DeleteSamurai();
+            //GetSamurais();
+            //QueryFilter();
+            //RetriveAndUpdateSamurai();
+            //DeleteSamurai();
 
 
             // Relation inserts
-            SamuraiWithAQuote();
+            //SamuraiWithAQuote();
+            //EagerLoadingRelatedData();
+            //ProjectSamuraiWithQuotes();
+            FilteringWithRelatedData();
 
         }
 
@@ -92,6 +96,21 @@ namespace SamuraiApp.UI
             };
             _context.Add(samurai);
             _context.SaveChanges();
+        }
+
+        private static void EagerLoadingRelatedData()
+        {
+            var samurais = _context.Samurais.Include(s => s.Quotes).ToList();
+        }
+
+        private static void ProjectSamuraiWithQuotes()
+        {
+            var data = _context.Samurais.Select(s => new { Id = s.Id, Name = s.Name }).ToList();
+        }
+
+        private static void FilteringWithRelatedData()
+        {
+            var samurais = _context.Samurais.Where(s => s.Quotes.Any(q => q.Text.Contains("Happy"))).ToList();
         }
     }
 }
