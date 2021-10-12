@@ -18,17 +18,18 @@ namespace SamuraiApp.UI
 
 
             Console.WriteLine("Samurai Operations: ");
+            /// Queries
             //GetSamurais();
             //QueryFilter();
             //RetriveAndUpdateSamurai();
             //DeleteSamurai();
 
 
-            // Relation inserts
+            /// Relation inserts
             //SamuraiWithAQuote();
             //EagerLoadingRelatedData();
             //ProjectSamuraiWithQuotes();
-            FilteringWithRelatedData();
+            //FilteringWithRelatedData();
 
         }
 
@@ -111,6 +112,16 @@ namespace SamuraiApp.UI
         private static void FilteringWithRelatedData()
         {
             var samurais = _context.Samurais.Where(s => s.Quotes.Any(q => q.Text.Contains("Happy"))).ToList();
+        }
+
+        private static void RemoveSamuraiFromBattleExplicit()
+        {
+            var bs = _context.Set<BattleSamurai>().SingleOrDefault(bs => bs.BattleId == 1 && bs.SamuraiId == 10);
+            if (bs != null)
+            {
+                _context.Remove(bs);
+                _context.SaveChanges();
+            }
         }
     }
 }
