@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SamuraiApp.Domain
 {
@@ -11,5 +8,9 @@ namespace SamuraiApp.Domain
         public int Id { get; set; }
         public string Name { get; set; }
         public List<Samurai> Samurais { get; set; } = new();
+
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
+
     }
 }
