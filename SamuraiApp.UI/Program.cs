@@ -10,10 +10,10 @@ namespace SamuraiApp.UI
         private static SamuraiContext _context = new();
         static void Main(string[] args)
         {
-            Console.WriteLine("Enter a Samurai Name To Save to DB:");
-            string samuraiName = Console.ReadLine();
-            AddSamurai(samuraiName);
-            AddBattle(samuraiName);
+            //Console.WriteLine("Enter a Samurai Name To Save to DB:");
+            //string samuraiName = Console.ReadLine();
+            //AddSamurai(samuraiName);
+            //AddBattle(samuraiName);
 
 
             Console.WriteLine("Samurai Operations: ");
@@ -21,6 +21,11 @@ namespace SamuraiApp.UI
             QueryFilter();
             RetriveAndUpdateSamurai();
             DeleteSamurai();
+
+
+            // Relation inserts
+            SamuraiWithAQuote();
+
         }
 
         private static Samurai AddSamurai(string SamuraiName)
@@ -73,6 +78,20 @@ namespace SamuraiApp.UI
                 _context.SaveChanges();
 
             }
+        }
+
+        private static void SamuraiWithAQuote()
+        {
+            var samurai = new Samurai
+            {
+                Name = "Kambi Shimbi",
+                Quotes = new System.Collections.Generic.List<Quote>
+                {
+                    new Quote{ Text = "I am samurai" }
+                }
+            };
+            _context.Add(samurai);
+            _context.SaveChanges();
         }
     }
 }
