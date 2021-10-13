@@ -20,6 +20,7 @@ namespace SamuraiApp.UI
             Console.WriteLine("Samurai Operations: ");
             /// Queries
             //GetSamurais();
+            //GetSamuraisRawSQL();
             //QueryFilter();
             //RetriveAndUpdateSamurai();
             //DeleteSamurai();
@@ -54,6 +55,14 @@ namespace SamuraiApp.UI
             var samurais = _context.Samurais.ToList();
             Console.WriteLine("GetSamurais:");
             samurais.ForEach(sam => Console.WriteLine(sam.Name));
+        }
+
+        private static void GetSamuraisRawSQL()
+        {
+            var samurais = _context.Samurais.FromSqlRaw("Select * From samurais").ToList();
+            Console.WriteLine("GetSamurais:");
+            samurais.ForEach(sam => Console.WriteLine(sam.Name));
+
         }
 
         private static void QueryFilter()
