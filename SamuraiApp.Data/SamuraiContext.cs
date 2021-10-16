@@ -7,16 +7,14 @@ namespace SamuraiApp.Data
 {
     public class SamuraiContext : DbContext
     {
+
+        public SamuraiContext(DbContextOptions<SamuraiContext> options) : base(options)
+        {
+        }
+
         public DbSet<Samurai> Samurais { get; set; }
         public DbSet<Battle> Battles { get; set; }
         public DbSet<Quote> Quotes { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder
-                .UseSqlServer("Data Source= (localdb)\\MSSQLLocalDB; Initial Catalog=SamuraiAppData", options => options.MaxBatchSize(100))
-                .LogTo(Console.WriteLine, new[] { DbLoggerCategory.Database.Command.Name }, LogLevel.Information);
-        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
